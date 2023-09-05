@@ -1,16 +1,22 @@
-
 # Importando a biblioteca flask
-from flask import Flask 
+from flask import Flask
+from flask import render_template
 
-# Criar app
 app = Flask("meu app")
 
-# # Criando rota pra linkar o caminho com a função  hello
-# @app.route('/')
-# def hello():
-#     return "Hello World"
+posts = [
+    {
+        "titulo":"Minha primeira postagem",
+        "texto":"teste"
+    },
+    {
+        "titulo":"Segunda primeira postagem",
+        "texto":"Outroteste"
+    }
+]
 
-@app.route('/novo')
-def hello():
-	return "<h1>Nova Página</h1>"
-    # Ao rodar essa nova rota, na url, digitar " /novo "
+@app.route('/')
+def exibir_entradas():
+    entradas = posts # MOCK das postagens
+    return render_template('exibir_entradas.html', entradas=entradas)
+
