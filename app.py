@@ -1,8 +1,19 @@
 from flask import Flask, render_template, request, session, abort, flash, redirect, url_for
 from posts import posts
+import sqlite3 # Necessário importar o sqlite3
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'pudim'
+
+
+# ---------------------Parte de BD---------------------
+app.config.from_object(__name__) # Libera o uso de BD no python/flask
+DATABASE = "banco.bd" # Variavel do BD criado
+
+# Função que conecta o BD
+def conectar():
+    return sqlite3.connect(DATABASE)
+# ------------------------------------------------------
 
 @app.route('/')
 def exibir_entradas():
